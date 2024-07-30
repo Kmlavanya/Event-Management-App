@@ -20,42 +20,47 @@
         </div>
         <div class="col-md-10 main-panel">
             <div class="card">
-                <div class="card-header">Admin Dashboard</div>
+                <div class="card-header">View Users</div>
                 <div class="card-body">
-                    <div id="admin-content">
-                        Welcome to the Admin Dashboard!
-                    </div>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat">
-                    <h3>7</h3>
-                    <p>Total Events</p>
-                </div>
-                <div class="stat">
-                    <h3>49</h3>
-                    <p>Total Speakers</p>
-                </div>
-                <div class="stat">
-                    <h3>20</h3>
-                    <p>Total Sponsors</p>
-                </div>
-                <div class="stat">
-                    <h3>2.75 Hrs</h3>
-                    <p>Total Time Savings</p>
+                    <table class="table table-bordered table-striped" id="users-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('admin.view-users') }}",
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
+            { data: 'role', name: 'role' }
+        ]
+    });
+});
+</script>
+@endpush
 
 <style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f0f2f5; /* Light background color */
-    }
     .container-fluid {
         height: 100%;
     }
@@ -103,24 +108,20 @@
     .card {
         margin-bottom: 20px;
     }
-    .stats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+    .table-responsive {
+        overflow-x: auto;
     }
-    .stat {
-        flex: 1;
-        background-color: #887b7b4d;
-        padding: 20px;
-        margin: 10px 0;
-        border-radius: 5px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
     }
-    .stat h3 {
-        margin: 0;
-        font-size: 36px;
-        color: #333333;
+    .table th,
+    .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
     }
 
     /* Responsive adjustments */
@@ -133,9 +134,5 @@
         .main-panel {
             margin-left: 0;
         }
-        .stats {
-            flex-direction: column;
-        }
     }
 </style>
-@endsection
