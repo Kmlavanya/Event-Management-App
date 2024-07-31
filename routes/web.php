@@ -23,6 +23,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
    
     Route::get('/admin/add-event', [AdminController::class, 'showAddEventForm'])->name('admin.add-event');
     Route::post('/admin/add-event', [AdminController::class, 'storeEvent'])->name('admin.store-event');
+
+    Route::get('/admin/view-events', [AdminController::class, 'viewEvents'])->name('admin.view-events');
+
 // });
 
 Route::middleware(['auth'])->group(function () {

@@ -11,7 +11,7 @@
             <a href="{{ route('admin.add-event') }}" class="list-group-item list-group-item-action active">
                 <i class="fas fa-calendar-plus"></i> Add Event
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar"></i> View Events
             </a>
             <a href="#" class="list-group-item list-group-item-action">
@@ -23,10 +23,10 @@
                 <div class="card-header">Add New Event</div>
                 <div class="card-body">
                     @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <form id="add-event-form" action="{{ route('admin.store-event') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
@@ -66,18 +66,18 @@
 </div>
 
 <style>
- 
     body, html {
         height: 100%;
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #f0f2f5; /* Light background color */
+        background-color: #121212; /* Dark background color */
+        color: #FFFFFF; /* Light text color */
     }
     .container-fluid {
         height: 100%;
     }
     .sidebar {
-        background-color: #343a40;
+        background-color: #1F1F1F;
         padding: 20px;
         height: 100vh;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
@@ -112,38 +112,43 @@
     }
     .main-panel {
         padding: 20px;
-        background-color: #ffffff;
+        background-color: #121212;
         margin-left: 17%;
         height: 100vh;
         overflow-y: auto;
     }
     .card {
+        background-color: #2C2C2C;
+        border: none;
+        border-radius: 10px;
         margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        color: #ffffff;
     }
-    .stats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-    .stat {
-        flex: 1;
-        background-color: #887b7b4d;
+    .card-header {
+        background-color: transparent;
+        border-bottom: none;
+        color: #e51a80;
+        font-size: 1.5rem;
         padding: 20px;
-        margin: 10px 0;
-        border-radius: 5px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .stat h3 {
-        margin: 0;
-        font-size: 36px;
-        color: #333333;
+    .card-body {
+        padding: 20px;
     }
     .form-label {
         font-weight: bold;
     }
     .form-control {
         border-radius: 5px;
+        background-color: #2C2C2C;
+        color: #FFFFFF;
+        border: 1px solid #555;
+    }
+    .form-control:focus {
+        background-color: #333333;
+        color: #FFFFFF;
+        border-color: #e51a80;
+        box-shadow: none;
     }
     .btn-primary {
         background-color: #e51a80;
@@ -164,12 +169,7 @@
         .main-panel {
             margin-left: 0;
         }
-        .stats {
-            flex-direction: column;
-        }
     }
-
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

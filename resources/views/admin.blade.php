@@ -11,7 +11,7 @@
             <a href="{{ route('admin.add-event') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar-plus"></i> Add Event
             </a>            
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar"></i> View Event
             </a>
             <a href="#" class="list-group-item list-group-item-action">

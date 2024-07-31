@@ -50,7 +50,7 @@ class AdminController extends Controller
             $imageName = time().'.'.$request->eventImage->extension();
             $request->eventImage->move(public_path('images'), $imageName);
         }
-        
+
         // Create a new event
         Event::create([
             'name' => $request->input('eventName'),
@@ -64,5 +64,12 @@ class AdminController extends Controller
 
         return redirect()->route('admin.add-event')->with('success', 'Event added successfully!');
     }
+
+    public function viewEvents()
+{
+    $events = Event::all();
+    return view('admin.view-events', compact('events'));
+}
+
 }
 

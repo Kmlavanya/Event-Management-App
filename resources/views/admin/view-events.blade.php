@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid" style="background-color: #0e0e0e">
+<div class="container-fluid explore-events">
     <div class="row">
         <div class="col-md-2 sidebar">
             <div class="current-plan">Dashboard</div>
-            <a href="{{ route('admin.view-users') }}" class="list-group-item list-group-item-action active">
+            <a href="{{ route('admin.view-users') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-users"></i> View Users
             </a>
             <a href="{{ route('admin.add-event') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar-plus"></i> Add Event
             </a>
-            <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action">
+            <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action active">
                 <i class="fas fa-calendar"></i> View Events
             </a>
             <a href="#" class="list-group-item list-group-item-action">
@@ -19,46 +19,31 @@
             </a>
         </div>
         <div class="col-md-10 main-panel">
-            <div class="card">
-                <div class="card-header">View Users</div>
-                <div class="card-body">
-                    <table class="table table-bordered table-striped" id="users-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                            </tr>
-                        </thead>
-                    </table>
+            <div class="explore-header">
+                <h2>Explore Events</h2>
+                
+            </div>
+            <div class="card popular-events">
+                <div class="card-header">Popular</div>
+                <div class="card-body d-flex flex-wrap">
+                    @foreach ($events as $event)
+                        <div class="event-card">
+                            <img src="{{ asset('images/' . $event->image) }}" class="img-fluid event-img" alt="{{ $event->name }}">
+                            <div class="event-info">
+                                <h5 class="event-title">{{ $event->name }}</h5>
+                                <p class="event-author">Author: {{ $event->author }}</p>
+                                <p class="event-organizer">Organizer: {{ $event->organizer }}</p>
+                                <p class="event-type">Type: {{ $event->type }}</p>
+                                <p class="event-price">Cash: ${{ $event->ticket_price }}</p>
+                                <p class="event-members">Total Members: {{ $event->members_limit }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-@push('scripts')
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#users-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.view-users') }}",
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' },
-            { data: 'email', name: 'email' },
-            { data: 'role', name: 'role' }
-        ]
-    });
-});
-</script>
-@endpush
 
 <style>
     body, html {
@@ -112,13 +97,25 @@ $(document).ready(function() {
         height: 100vh;
         overflow-y: auto;
     }
+    .explore-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .search-bar {
+        width: 300px;
+        border-radius: 20px;
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
     .card {
-        background-color: #2C2C2C;
+        background-color: #1F1F1F;
         border: none;
         border-radius: 10px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .card-header {
         background-color: transparent;
@@ -130,35 +127,30 @@ $(document).ready(function() {
     .card-body {
         padding: 20px;
     }
-    /* .table {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 1rem;
-        background-color: transparent;
-        color: #ffffff;
+    .event-card {
+        background-color: #2C2C2C;
+        border-radius: 10px;
+        margin: 10px;
+        padding: 15px;
+        width: 200px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-align: center;
     }
-    .table th, .table td {
-        padding: 0.75rem;
-        vertical-align: top;
-        border-top: 1px solid #dee2e6;
+    .event-img {
+        border-radius: 10px;
+        margin-bottom: 10px;
     }
-    .table thead th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #dee2e6;
-        color: #100f0f;
+    .event-info {
+        color: #e5e5e5;
     }
-    .table tbody + tbody {
-        border-top: 2px solid #dee2e6;
+    .event-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
     }
-    .table-bordered {
-        border: 1px solid #dee2e6;
+    .event-author, .event-organizer, .event-type, .event-price, .event-members {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
     }
-    .table-bordered th, .table-bordered td {
-        border: 1px solid #dee2e6;
-    }
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: rgba(0, 0, 0, 0.05);
-    } */
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
@@ -170,5 +162,14 @@ $(document).ready(function() {
         .main-panel {
             margin-left: 0;
         }
+        .explore-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .search-bar {
+            width: 100%;
+            margin-top: 10px;
+        }
     }
 </style>
+@endsection
