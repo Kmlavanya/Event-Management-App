@@ -1,44 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid explore-events">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-2 sidebar">
-            <div class="current-plan">Dashboard</div>
-            <a href="{{ route('admin.view-users') }}" class="list-group-item list-group-item-action">
-                <i class="fas fa-users"></i> View Users
+            <div class="current-plan">User Dashboard</div>
+            <a href="{{ route('user.buy-tickets') }}" class="list-group-item list-group-item-action active">
+                <i class="fas fa-ticket-alt"></i> Buy Tickets
             </a>
-            <a href="{{ route('admin.add-event') }}" class="list-group-item list-group-item-action">
-                <i class="fas fa-calendar-plus"></i> Add Event
-            </a>
-            <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action active">
-                <i class="fas fa-calendar"></i> View Events
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <i class="fas fa-user-check"></i> View Event Booker
-            </a>
+            {{-- <a href="{{ route('user.view-tickets') }}" class="list-group-item list-group-item-action">
+                <i class="fas fa-eye"></i> View Tickets
+            </a> --}}
         </div>
         <div class="col-md-10 main-panel">
-            <div class="explore-header">
-                <h2>Explore Events</h2>
-                
-            </div>
-            <div class="card popular-events">
-                <div class="card-header">Popular</div>
-                <div class="card-body d-flex flex-wrap">
-                    @foreach ($events as $event)
-                        <div class="event-card">
-                            <img src="{{ asset('images/' . $event->image) }}" class="img-fluid event-img" alt="{{ $event->name }}">
-                            <div class="event-info">
-                                <h5 class="event-title">{{ $event->name }}</h5>
-                                <p class="event-author">Author: {{ $event->author }}</p>
-                                <p class="event-organizer">Organizer: {{ $event->organizer }}</p>
-                                <p class="event-type">Type: {{ $event->type }}</p>
-                                <p class="event-price">Cash: ${{ $event->ticket_price }}</p>
-                                <p class="event-members">Total Members: {{ $event->members_limit }}</p>
+            <div class="card">
+                <div class="card-header">Available Events</div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+                        @foreach ($events as $event)
+                            <div class="event-card">
+                                <img src="{{ asset('images/' . $event->image) }}" class="img-fluid event-img" alt="{{ $event->name }}">
+                                <div class="event-info">
+                                    <h5 class="event-title">{{ $event->name }}</h5>
+                                    <p class="event-author">Author: {{ $event->author }}</p>
+                                    <p class="event-organizer">Organizer: {{ $event->organizer }}</p>
+                                    <p class="event-type">Type: {{ $event->type }}</p>
+                                    <p class="event-price">Price: ${{ $event->ticket_price }}</p>
+                                    <p class="event-members">Available Seats: {{ $event->members_limit }}</p>
+                                    {{-- <form action="{{ route('user.register-event', $event->id) }}" method="POST"> --}}
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    {{-- </form> --}}
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,6 +139,14 @@
     .event-author, .event-organizer, .event-type, .event-price, .event-members {
         font-size: 0.9rem;
         margin-bottom: 5px;
+    }
+    .btn-primary {
+        background-color: #e51a80;
+        border-color: #e51a80;
+    }
+    .btn-primary:hover {
+        background-color: #d41b6b;
+        border-color: #d41b6b;
     }
 
     /* Responsive adjustments */

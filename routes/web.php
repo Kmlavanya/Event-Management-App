@@ -28,7 +28,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // });
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
-});
+    Route::get('/user/buy-tickets', [UserController::class, 'showBuyTickets'])->name('user.buy-tickets');
+    // Route::post('/user/register-event/{event}', [UserController::class, 'registerEvent'])->name('user.register-event');
+    // Route::get('/user/view-tickets', [UserController::class, 'viewTickets'])->name('user.view-tickets');
+// });
 
