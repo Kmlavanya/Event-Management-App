@@ -17,10 +17,13 @@ Auth::routes(); // This should register the default routes for login, registrati
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/view-users', [AdminController::class, 'viewUsers'])->name('admin.view-users');
-});
+   
+    Route::get('/admin/add-event', [AdminController::class, 'showAddEventForm'])->name('admin.add-event');
+    Route::post('/admin/add-event', [AdminController::class, 'storeEvent'])->name('admin.store-event');
+// });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');

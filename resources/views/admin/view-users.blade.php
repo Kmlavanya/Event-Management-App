@@ -8,7 +8,7 @@
             <a href="{{ route('admin.view-users') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-users"></i> View Users
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{{ route('admin.add-event')}}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar-plus"></i> Add Event
             </a>
             <a href="#" class="list-group-item list-group-item-action">
@@ -70,7 +70,7 @@ $(document).ready(function() {
         height: 100vh;
         box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         border-radius: 5px;
-        position: fixed;
+        position: absolute;
         overflow-y: auto;
     }
     .current-plan {
