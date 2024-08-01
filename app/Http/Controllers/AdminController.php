@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Registration;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+
 
 class AdminController extends Controller
 {
@@ -69,6 +74,44 @@ class AdminController extends Controller
 {
     $events = Event::all();
     return view('admin.view-events', compact('events'));
+}
+
+public function viewEventBookers($eventId)
+{
+    $event = Event::findOrFail($eventId);
+    return view('admin.view-eventbooker', compact('event'));
+}
+
+public function fetchEventBookers(Request $request, $eventId)
+{
+    if ($request->ajax()) {
+        $data = Registration::where('event_id', $eventId)->select(['event_id', 'name', 'email', 'gender', 'age', 'cash']);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
+}
+
+public function export() 
+{
+    return Excel::download(new UsersExport, 'users.xlsx');
+}
+     
+/**
+* @return \Illuminate\Support\Collection
+*/
+public function import(Request $request) 
+{
+    // Validate incoming request data
+    $request->validate([
+        'file' => 'required|max:2048',
+        'event_id' => 'required|exists:events,id'
+    ]);
+    $eventId = $request->input('event_id');
+    
+    Excel::import(new UsersImport($eventId), $request->file('file'));
+             
+    return back()->with('success', 'Users imported successfully.');
 }
 
 }

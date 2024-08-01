@@ -14,9 +14,9 @@
             <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar"></i> View Event
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            {{-- <a href="{{ route('admin.viewEventBooker', ['eventId' => 1]) }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-user-check"></i> View Event Booker
-            </a>
+            </a> --}}
         </div>
         <div class="col-md-10 main-panel">
             <div class="card">

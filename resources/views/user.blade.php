@@ -6,7 +6,7 @@
         <div class="col-md-2 sidebar">
             <div class="current-plan">User Dashboard</div>
             <a href="{{ route('user.buy-tickets') }}" class="list-group-item list-group-item-action">
-                <i class="fas fa-ticket-alt"></i> Buy Tickets
+                <i class="fas fa-spinner fa-pulse"></i> Buy Tickets
             </a>
             {{-- <a href="{{ route('user.view-tickets') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-eye"></i> View Tickets

@@ -14,9 +14,9 @@
             <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action active">
                 <i class="fas fa-calendar"></i> View Events
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            {{-- <a href="{{ route('admin.viewEventBooker', ['eventId' => 1]) }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-user-check"></i> View Event Booker
-            </a>
+            </a> --}}
         </div>
         <div class="col-md-10 main-panel">
             <div class="explore-header">
@@ -36,6 +36,7 @@
                                 <p class="event-type">Type: {{ $event->type }}</p>
                                 <p class="event-price">Cash: ${{ $event->ticket_price }}</p>
                                 <p class="event-members">Total Members: {{ $event->members_limit }}</p>
+                                <a href="{{ route('admin.viewEventBooker', $event->id) }}" class="btn btn-primary">See Tickets Booked</a>
                             </div>
                         </div>
                     @endforeach

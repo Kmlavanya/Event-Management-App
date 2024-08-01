@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('home');
@@ -26,12 +27,22 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/admin/view-events', [AdminController::class, 'viewEvents'])->name('admin.view-events');
 
+    Route::get('/admin/view-eventbooker/{eventId}', [AdminController::class, 'viewEventBookers'])->name('admin.viewEventBooker');
+    Route::get('/admin/fetch-eventbooker/{eventId}', [AdminController::class, 'fetchEventBookers'])->name('admin.fetchEventBookers');
+
+
+
 // });
 
 // Route::middleware(['auth'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/buy-tickets', [UserController::class, 'showBuyTickets'])->name('user.buy-tickets');
-    // Route::post('/user/register-event/{event}', [UserController::class, 'registerEvent'])->name('user.register-event');
-    // Route::get('/user/view-tickets', [UserController::class, 'viewTickets'])->name('user.view-tickets');
+   
+Route::get('/register/{eventId}', [RegisterController::class, 'showForm'])->name('user.register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+Route::get('users-export', [AdminController::class, 'export'])->name('users.export');
+Route::post('users-import', [AdminController::class, 'import'])->name('users.import');
+
 // });
 

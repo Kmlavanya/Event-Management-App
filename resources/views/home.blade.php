@@ -115,7 +115,7 @@
     <script>
         // Countdown Timer Script
         const countdown = () => {
-            const countDate = new Date('July 31, 2024 18:30:00').getTime();
+            const countDate = new Date('August 3, 2024 18:30:00').getTime();
             const now = new Date().getTime();
             const gap = countDate - now;
 

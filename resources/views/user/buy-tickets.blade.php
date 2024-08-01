@@ -6,7 +6,7 @@
         <div class="col-md-2 sidebar">
             <div class="current-plan">User Dashboard</div>
             <a href="{{ route('user.buy-tickets') }}" class="list-group-item list-group-item-action active">
-                <i class="fas fa-ticket-alt"></i> Buy Tickets
+                <i class="fas fa-spinner fa-pulse"></i> Buy Tickets
             </a>
             {{-- <a href="{{ route('user.view-tickets') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-eye"></i> View Tickets
@@ -27,10 +27,10 @@
                                     <p class="event-type">Type: {{ $event->type }}</p>
                                     <p class="event-price">Price: ${{ $event->ticket_price }}</p>
                                     <p class="event-members">Available Seats: {{ $event->members_limit }}</p>
-                                    {{-- <form action="{{ route('user.register-event', $event->id) }}" method="POST"> --}}
-                                        @csrf
+                                    <form action="{{ route('user.register', ['eventId' => $event->id]) }}" method="GET">
+                                        @csrf   
                                         <button type="submit" class="btn btn-primary">Register</button>
-                                    {{-- </form> --}}
+                                    </form>
                                 </div>
                             </div>
                         @endforeach

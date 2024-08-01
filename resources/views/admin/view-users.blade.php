@@ -14,24 +14,27 @@
             <a href="{{ route('admin.view-events') }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-calendar"></i> View Events
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            {{-- <a href="{{ route('admin.viewEventBooker', ['eventId' => 1]) }}" class="list-group-item list-group-item-action">
                 <i class="fas fa-user-check"></i> View Event Booker
-            </a>
+            </a> --}}
         </div>
         <div class="col-md-10 main-panel">
             <div class="card">
+                
                 <div class="card-header">View Users</div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" id="users-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,7 +57,8 @@ $(document).ready(function() {
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
             { data: 'role', name: 'role' }
-        ]
+        ],
+        responsive: true
     });
 });
 </script>
@@ -130,7 +134,7 @@ $(document).ready(function() {
     .card-body {
         padding: 20px;
     }
-    /* .table {
+    .table {
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
@@ -158,7 +162,7 @@ $(document).ready(function() {
     }
     .table-striped tbody tr:nth-of-type(odd) {
         background-color: rgba(0, 0, 0, 0.05);
-    } */
+    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
