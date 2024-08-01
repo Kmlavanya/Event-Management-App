@@ -8,7 +8,7 @@ use App\Models\Event;
 use App\Models\Registration;
 use Illuminate\Support\Facades\Log;
 
-class RegisterController extends Controller
+class Registerusercontroller extends Controller
 {
     public function showForm($eventId)
     {
