@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Registerusercontroller;
 use App\Http\Controllers\Auth\RegisterController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');

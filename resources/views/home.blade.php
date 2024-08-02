@@ -25,17 +25,17 @@
             color: white !important;
         }
         .carousel, .carousel-inner, .carousel-item {
-            height: 100vh; /* Full viewport height */
+            height: 100vh; 
         }
         .carousel-item {
             position: relative;
-            height: 100vh; /* Full viewport height */
+            height: 100vh; 
             background: linear-gradient(to right, rgba(0, 0, 0, 0.396), rgba(0, 0, 0, 0.555)),
                         url('{{ asset('img/eventhome1.jpg') }}') no-repeat center center;
-            background-size: cover; /* Ensure the image covers the container */
+            background-size: cover; 
         }
         .carousel-item img {
-            display: none; /* Hide the image as it's being used as a background */
+            display: none; 
         }
         .carousel-caption {
             position: absolute;
@@ -140,10 +140,10 @@
         }
         @media (min-width: 768px) {
             .about .row {
-                gap: 30px; /* Space between image and content */
+                gap: 30px;
             }
             .services .row {
-                gap: 20px; /* Space between service cards */
+                gap: 20px;
             }
         }
     </style>
@@ -188,7 +188,16 @@
             <div class="carousel-inner">
                 <div class="carousel-item active" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.396), rgba(0, 0, 0, 0.555)), url('{{ asset('img/eventhome1.jpg') }}') no-repeat center center; background-size: cover;">
                     <div class="carousel-caption">
-                        <h3>Welcome to the World's best Event planning website</h3>
+                        <p>Welcome to the World's best Event planning website</p>
+                        <div class="countdown">
+                            <h3>Next Event Starts In:</h3>
+                            <div id="countdown">
+                                <span id="days">0</span> Days 
+                                <span id="hours">0</span> Hours 
+                                <span id="minutes">0</span> Minutes 
+                                <span id="seconds">0</span> Seconds
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.396), rgba(0, 0, 0, 0.555)), url('{{ asset('img/eventhome2.jpg') }}') no-repeat center center; background-size: cover;">
@@ -289,7 +298,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // Countdown Timer Script
+        
         const countdown = () => {
             const countDate = new Date('August 3, 2024 18:30:00').getTime();
             const now = new Date().getTime();
